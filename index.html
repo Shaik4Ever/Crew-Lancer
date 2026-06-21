@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="transition-colors duration-500">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌟CREWLANCER - Hackathon Edition</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',
+            darkbg: '#0f172a'
+          },
+          backgroundImage: {
+            lightbg: "url('https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=1950&q=80')",
+            darkbg: "url('https://images.unsplash.com/photo-1517816428104-797678c7cf42?auto=format&fit=crop&w=1950&q=80')"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="text-gray-900 dark:text-white min-h-screen p-0">
+  <!-- Navbar -->
+  <nav class="w-full fixed top-0 left-0 z-50 bg-white/70 dark:bg-gray-900/80 backdrop-blur-md shadow-md border-b border-gray-300 dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-primary dark:text-indigo-400">🌟CREWLANCER </h1>
+      <ul class="hidden md:flex space-x-6 text-sm font-medium">
+        <li><a href="#about" class="hover:text-primary">About</a></li>
+        <li><a href="#form" class="hover:text-primary">Join</a></li>
+        <li><a href="#volunteers" class="hover:text-primary">Volunteers</a></li>
+        <li><a href="#works" class="hover:text-primary">Our Work</a></li>
+      </ul>
+      <button id="themeToggle" class="w-10 h-10 ml-4 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-300 dark:border-gray-600">
+        <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Spacer -->
+  <div class="pt-20"></div>
+
+  <!-- About Section -->
+  <section id="about" class="text-center py-12 px-6">
+    <h2 class="text-4xl font-bold text-primary dark:text-indigo-400 mb-4">🌈 Welcome to CREWLANCER </h2>
+    <p class="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">We are the pulse behind the most energetic, vibrant, and dynamic events on campus. From backstage coordination to stunning visuals and outreach – we do it all. Come be a part of something awesome! 🎉</p>
+  </section>
+
+  <!-- Join Form & Volunteer List -->
+  <section id="form" class="flex flex-col items-center justify-center px-4">
+    <div class="w-full max-w-4xl bg-white/70 dark:bg-gray-900/80 backdrop-blur-xl shadow-2xl rounded-3xl p-8 border border-white dark:border-gray-700">
+      <h1 class="text-3xl font-extrabold text-center text-primary dark:text-indigo-400 mb-4">🚀 Join Our Team</h1>
+      <form id="volunteerForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="text" id="name" placeholder="Full Name" required class="col-span-2 px-4 py-3 rounded-xl border dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none" />
+        <input type="text" id="contact" placeholder="Email / Phone" required class="px-4 py-3 rounded-xl border dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none" />
+        <input type="text" id="college" placeholder="College Name" required class="px-4 py-3 rounded-xl border dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none" />
+        <select id="domain" required class="col-span-2 px-4 py-3 rounded-xl border dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none">
+          <option value="">Select Domain</option>
+          <option value="Marketing">🎯 Marketing</option>
+          <option value="On-Ground Operations">🦺 On-Ground Operations</option>
+          <option value="Photography">📸 Photography</option>
+          <option value="Finance">💰 Finance</option>
+        </select>
+        <button type="submit" class="col-span-2 bg-primary text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all">✅ Submit</button>
+      </form>
+      <button onclick="exportCSV()" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700 transition-all">📁 Download CSV</button>
+
+      <h2 id="volunteers" class="text-2xl font-bold text-primary dark:text-indigo-400 mt-10 mb-4 text-center">📋 Volunteer List</h2>
+      <div class="flex justify-end mb-2">
+        <select id="filterDomain" class="px-4 py-2 rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-800">
+          <option value="">Filter by Domain</option>
+          <option value="Marketing">Marketing</option>
+          <option value="On-Ground Operations">On-Ground Operations</option>
+          <option value="Photography">Photography</option>
+          <option value="Finance">Finance</option>
+        </select>
+      </div>
+      <ul id="volunteerList" class="space-y-4 max-h-96 overflow-y-auto px-2"></ul>
+    </div>
+  </section>
+  
+
+  <!-- Our Works -->
+  <section id="works" class="py-12 px-6 text-center">
+    <h2 class="text-3xl font-bold text-primary dark:text-indigo-400 mb-4">🎨 Our Past Work</h2>
+    <p class="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">Here are some glimpses of the amazing events we’ve managed. From fests to cultural nights – our squad brings the energy, coordination, and creativity to make it unforgettable.</p>
+    <!-- Add screenshots or a carousel here -->
+  </section>
+
+<script>
+  const form = document.getElementById('volunteerForm');
+  const list = document.getElementById('volunteerList');
+  const html = document.documentElement;
+  const toggleBtn = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const filterDomain = document.getElementById('filterDomain');
+
+  const domainColors = {
+    "Marketing": "bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300",
+    "On-Ground Operations": "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300",
+    "Photography": "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300",
+    "Finance": "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"
+  };
+
+  function loadVolunteers(filter = '') {
+    const data = JSON.parse(localStorage.getItem('volunteers')) || [];
+    list.innerHTML = '';
+    const filtered = filter ? data.filter(v => v.domain === filter) : data;
+    if (filtered.length === 0) {
+      list.innerHTML = '<p class="text-center text-gray-500 dark:text-gray-400 italic">No volunteers yet.</p>';
+      return;
+    }
+    filtered.forEach((v, index) => {
+      const color = domainColors[v.domain] || "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300";
+      const li = document.createElement('li');
+      li.className = "bg-white dark:bg-gray-800 p-4 rounded-xl shadow border border-gray-200 dark:border-gray-700";
+      li.innerHTML = `
+        <p class="text-lg font-bold text-indigo-800 dark:text-indigo-300">${v.name}</p>
+        <p class="text-gray-700 dark:text-gray-300">${v.contact} • ${v.college}</p>
+        <span class="inline-block mt-2 px-3 py-1 text-sm rounded-full ${color}">${v.domain}</span>
+        <button onclick="deleteVolunteer(${index})" class="ml-4 text-red-500 hover:text-red-700 font-semibold float-right">Delete</button>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  function deleteVolunteer(index) {
+    if (!confirm("Are you sure you want to delete this volunteer?")) return;
+    const data = JSON.parse(localStorage.getItem('volunteers')) || [];
+    data.splice(index, 1);
+    localStorage.setItem('volunteers', JSON.stringify(data));
+    loadVolunteers(filterDomain.value);
+  }
+
+  function exportCSV() {
+    const data = JSON.parse(localStorage.getItem('volunteers')) || [];
+    if (data.length === 0) return;
+    const csv = ["Name,Contact,College,Domain", ...data.map(v => `${v.name},${v.contact},${v.college},${v.domain}`)].join("\n");
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'volunteers.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const college = document.getElementById('college').value.trim();
+  const domain = document.getElementById('domain').value;
+
+  if (!name || !contact || !college || !domain) {
+    showToast("❗ Please fill all fields!", "error");
+    return;
+  }
+
+  const existing = JSON.parse(localStorage.getItem('volunteers')) || [];
+
+  if (existing.some(v => v.name === name && v.contact === contact)) {
+    showToast("⚠️ This volunteer already exists!", "warning");
+    return;
+  }
+
+  const newVolunteer = { name, contact, college, domain };
+  existing.push(newVolunteer);
+  localStorage.setItem('volunteers', JSON.stringify(existing));
+  form.reset();
+
+  showToast("🎉 Volunteer added successfully!", "success");
+
+  filterDomain.value = '';
+  loadVolunteers();
+});
+
+  function setTheme(dark) {
+    if (dark) {
+      html.classList.add('dark');
+      document.body.style.backgroundImage = "linear-gradient(to bottom, rgba(15,23,42,0.8), rgba(15,23,42,0.8)), url('https://images.unsplash.com/photo-1517816428104-797678c7cf42?auto=format&fit=crop&w=1950&q=80')";
+      themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 0010 9.79z" />`;
+    } else {
+      html.classList.remove('dark');
+      document.body.style.backgroundImage = "linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=1950&q=80')";
+      themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-9H21m-17 0H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z" />`;
+    }
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = html.classList.contains('dark');
+    setTheme(!isDark);
+  });
+
+  filterDomain.addEventListener('change', () => {
+    loadVolunteers(filterDomain.value);
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    setTheme(savedTheme === 'dark');
+    loadVolunteers();
+  });
+  function showToast(message, type = 'success') {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+
+  // Reset classes
+  toast.className = "fixed bottom-6 right-6 text-white px-4 py-3 rounded-xl shadow-lg opacity-0 transition-opacity duration-500 z-50";
+
+  // Apply type color
+  if (type === 'success') {
+    toast.classList.add('bg-green-600');
+  } else if (type === 'error') {
+    toast.classList.add('bg-red-600');
+  } else if (type === 'warning') {
+    toast.classList.add('bg-yellow-500', 'text-black');
+  }
+
+  // Show toast
+  toast.classList.remove('opacity-0');
+  toast.classList.add('opacity-100');
+
+  setTimeout(() => {
+    toast.classList.remove('opacity-100');
+    toast.classList.add('opacity-0');
+  }, 3000);
+}
+
+
+
+</script>
+
+<div id="toast" class="fixed bottom-6 right-6 bg-green-600 text-white px-4 py-3 rounded-xl shadow-lg opacity-0 transition-opacity duration-500 z-50">
+    🎉 Volunteer added successfully!
+  </div>
+  
+</body>
+</html>
