@@ -60,4 +60,5 @@ GitHub: https://github.com/Shaik4Ever
 
 ---
 
-⭐ If you like this project, consider giving it a star!<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b7acebc4-be22-4c3a-a106-7e16cde4812d" />
+⭐ If you like this project, consider giving it a star!<img width="1920" height="1080" alt="image" src="<img width="1920" height="1080" alt="Screenshot 2026-06-21 232542" src="https://github.com/user-attachments/assets/9ba8437d-3b2e-44ba-8ee9-712bcb11012e" />
+" />
